@@ -1,0 +1,42 @@
+.footer {
+  background: var(--bg-card);
+  padding: 2rem 0;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer p {
+  color: var(--text-secondary);
+  margin: 0.5rem 0;
+}
+
+.footer-made {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.heart-icon {
+  color: #e25555;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  10%,
+  30% {
+    transform: scale(1.2);
+  }
+  20%,
+  40% {
+    transform: scale(1.1);
+  }
+}
+
+.coffee-icon {
+  color: var(--primary-color);
+}
