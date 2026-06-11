@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiAward, FiTarget } from 'react-icons/fi';
+import { FiAward, FiTarget, FiCheck } from 'react-icons/fi';
 import { IoSchoolOutline } from 'react-icons/io5';
 import { aboutInfo } from '../data/portfolioData';
 import './About.css';
@@ -11,18 +11,6 @@ const About = () => {
     threshold: 0.1,
   });
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.2,
-        duration: 0.6,
-      },
-    }),
-  };
-
   return (
     <section id="about" className="about">
       <div className="container">
@@ -32,55 +20,68 @@ const About = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          Về tôi
+          Giới thiệu
         </motion.h2>
 
-        <div className="about-content" ref={ref}>
+        <div className="about-grid" ref={ref}>
+          {/* Main Card: Career Objectives */}
           <motion.div
-            className="info-card"
-            custom={0}
-            initial="hidden"
-            animate={inView ? 'visible' : 'hidden'}
-            variants={cardVariants}
-            whileHover={{ y: -10, boxShadow: 'var(--shadow-xl)' }}
+            className="about-card main-card glass-card"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <IoSchoolOutline className="card-icon" />
-            <h3>Học vấn</h3>
-            <p>{aboutInfo.education.school}</p>
-            <p className="highlight">
-              {aboutInfo.education.major} - GPA: {aboutInfo.education.gpa}
-            </p>
-            <p className="date">{aboutInfo.education.period}</p>
+            <div className="card-header">
+              <FiTarget className="card-icon glow-icon" />
+              <h3>Mục tiêu nghề nghiệp</h3>
+            </div>
+            <p className="goal-text">{aboutInfo.goal}</p>
+            <div className="intro-badges">
+              <span className="intro-badge">Deep Learning</span>
+              <span className="intro-badge">Computer Vision</span>
+              <span className="intro-badge">MLOps</span>
+              <span className="intro-badge">AI Deployment</span>
+            </div>
           </motion.div>
 
+          {/* Education Card */}
           <motion.div
-            className="info-card"
-            custom={1}
-            initial="hidden"
-            animate={inView ? 'visible' : 'hidden'}
-            variants={cardVariants}
-            whileHover={{ y: -10, boxShadow: 'var(--shadow-xl)' }}
+            className="about-card education-card glass-card"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <FiAward className="card-icon" />
-            <h3>Thành tựu</h3>
-            <ul>
+            <div className="card-header">
+              <IoSchoolOutline className="card-icon glow-icon" />
+              <h3>Học vấn</h3>
+            </div>
+            <h4 className="school-name">{aboutInfo.education.school}</h4>
+            <div className="school-details">
+              <span className="school-major">{aboutInfo.education.major}</span>
+              <span className="school-gpa">GPA: {aboutInfo.education.gpa}</span>
+            </div>
+            <p className="school-period">{aboutInfo.education.period}</p>
+          </motion.div>
+
+          {/* Achievements Card */}
+          <motion.div
+            className="about-card achievements-card glass-card"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <div className="card-header">
+              <FiAward className="card-icon glow-icon" />
+              <h3>Thành tựu</h3>
+            </div>
+            <ul className="achievement-list">
               {aboutInfo.achievements.map((achievement, index) => (
-                <li key={index}>{achievement}</li>
+                <li key={index}>
+                  <FiCheck className="check-icon" />
+                  <span>{achievement}</span>
+                </li>
               ))}
             </ul>
-          </motion.div>
-
-          <motion.div
-            className="info-card"
-            custom={2}
-            initial="hidden"
-            animate={inView ? 'visible' : 'hidden'}
-            variants={cardVariants}
-            whileHover={{ y: -10, boxShadow: 'var(--shadow-xl)' }}
-          >
-            <FiTarget className="card-icon" />
-            <h3>Mục tiêu</h3>
-            <p>{aboutInfo.goal}</p>
           </motion.div>
         </div>
       </div>

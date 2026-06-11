@@ -1,23 +1,65 @@
+// ===== LOADING SCREEN =====
+document.addEventListener('DOMContentLoaded', () => {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const loadingBarFill = document.getElementById('loadingBarFill');
+    
+    if (loadingScreen && loadingBarFill) {
+        // Animate loading bar
+        setTimeout(() => {
+            loadingBarFill.style.width = '100%';
+        }, 100);
+
+        // Hide screen
+        setTimeout(() => {
+            loadingScreen.classList.add('fade-out');
+        }, 2200);
+    }
+});
+
 // ===== THEME TOGGLE =====
 const themeToggle = document.getElementById('themeToggle');
 const html = document.documentElement;
 
-// Load saved theme
-const currentTheme = localStorage.getItem('theme') || 'light';
+const currentTheme = localStorage.getItem('theme') || 'dark';
 html.setAttribute('data-theme', currentTheme);
 
-themeToggle.addEventListener('click', () => {
-    const theme = html.getAttribute('data-theme');
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    
-    // Add rotation animation
-    themeToggle.style.transform = 'rotate(360deg) scale(1.1)';
-    setTimeout(() => {
-        themeToggle.style.transform = '';
-    }, 300);
+function updateThemeIcon(theme) {
+    if (!themeToggle) return;
+    const sunIcon = themeToggle.querySelector('.fa-sun');
+    const moonIcon = themeToggle.querySelector('.fa-moon');
+    if (sunIcon && moonIcon) {
+        if (theme === 'dark') {
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+        } else {
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+        }
+    }
+}
+updateThemeIcon(currentTheme);
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const theme = html.getAttribute('data-theme');
+        const newTheme = theme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+        
+        themeToggle.style.transform = 'rotate(360deg)';
+        setTimeout(() => {
+            themeToggle.style.transform = '';
+        }, 400);
+    });
+}
+
+// Listen for external theme changes (from Command Palette)
+window.addEventListener('storage', () => {
+    const theme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', theme);
+    updateThemeIcon(theme);
 });
 
 // ===== MOBILE MENU TOGGLE =====
@@ -25,46 +67,48 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
-
-// Close menu when clicking on a link
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
     });
-});
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+}
 
 // ===== NAVBAR SCROLL EFFECT =====
 const navbar = document.querySelector('.navbar');
-
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
     }
-});
+}, { passive: true });
 
 // ===== TYPING ANIMATION =====
 const typingText = document.querySelector('.typing-text');
-const texts = [
-    'Thực Tập Sinh AI',
+const typingTexts = [
     'AI Engineer',
-    'Machine Learning Developer',
-    'Data Scientist'
+    'Computer Vision Specialist',
+    'Deep Learning Engineer',
+    'MLOps Practitioner'
 ];
-
 let textIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
 let typingSpeed = 100;
 
 function type() {
-    const currentText = texts[textIndex];
+    if (!typingText) return;
+    const currentText = typingTexts[textIndex];
     
     if (isDeleting) {
         typingText.textContent = currentText.substring(0, charIndex - 1);
@@ -77,20 +121,20 @@ function type() {
     }
     
     if (!isDeleting && charIndex === currentText.length) {
-        // Pause at end
-        typingSpeed = 2000;
+        typingSpeed = 2500;
         isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
-        textIndex = (textIndex + 1) % texts.length;
+        textIndex = (textIndex + 1) % typingTexts.length;
         typingSpeed = 500;
     }
     
     setTimeout(type, typingSpeed);
 }
 
-// Start typing animation
-setTimeout(type, 1000);
+if (typingText) {
+    setTimeout(type, 1000);
+}
 
 // ===== SMOOTH SCROLLING =====
 navLinks.forEach(link => {
@@ -100,7 +144,7 @@ navLinks.forEach(link => {
         const targetSection = document.querySelector(targetId);
         
         if (targetSection) {
-            const offsetTop = targetSection.offsetTop - 80;
+            const offsetTop = targetSection.offsetTop - 70;
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -109,9 +153,9 @@ navLinks.forEach(link => {
     });
 });
 
-// ===== SCROLL ANIMATIONS =====
+// ===== INTERSECTION OBSERVER FOR FADE-IN =====
 const observerOptions = {
-    threshold: 0.1,
+    threshold: 0.05,
     rootMargin: '0px 0px -50px 0px'
 };
 
@@ -120,310 +164,357 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             entry.target.classList.add('animate');
             
-            // Animate skill bars
+            // Skill bar loading animation
             if (entry.target.classList.contains('skill-category')) {
                 const skillBars = entry.target.querySelectorAll('.skill-progress');
                 skillBars.forEach(bar => {
                     const progress = bar.getAttribute('data-progress');
                     setTimeout(() => {
                         bar.style.width = progress + '%';
-                    }, 200);
+                    }, 100);
                 });
-            }
-            
-            // Stagger animation for multiple items
-            if (entry.target.classList.contains('info-card') || 
-                entry.target.classList.contains('project-card')) {
-                const index = Array.from(entry.target.parentElement.children).indexOf(entry.target);
-                entry.target.style.animationDelay = `${index * 0.1}s`;
-            }
-            
-            // Stagger social links
-            if (entry.target.classList.contains('social-link')) {
-                const index = Array.from(entry.target.parentElement.children).indexOf(entry.target);
-                entry.target.style.animationDelay = `${index * 0.1}s`;
-            }
-            
-            // Stagger contact items
-            if (entry.target.classList.contains('contact-item')) {
-                const index = Array.from(entry.target.parentElement.children).indexOf(entry.target);
-                entry.target.style.animationDelay = `${index * 0.1}s`;
             }
         }
     });
 }, observerOptions);
 
-// Observe all animated elements
 const animatedElements = document.querySelectorAll(
-    '.info-card, .skill-category, .timeline-item, .project-card, .contact-item, .social-link'
+    '.about-card, .skill-category, .timeline-item, .project-card, .cert-card, .blog-card, .contact-card'
 );
-
 animatedElements.forEach(el => observer.observe(el));
 
-// ===== PARALLAX EFFECT FOR HERO =====
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const heroImage = document.querySelector('.hero-image');
-    
-    if (heroImage) {
-        heroImage.style.transform = `translateY(${scrolled * 0.3}px)`;
-    }
-});
-
-// ===== ACTIVE NAVIGATION LINK =====
-const sections = document.querySelectorAll('section[id]');
+// ===== EXPERIENCES TIMELINE PROGRESS LINE =====
+const timelineContainer = document.querySelector('.timeline-container');
+const timelineTrackFill = document.getElementById('timelineTrackFill');
 
 window.addEventListener('scroll', () => {
-    const scrollY = window.pageYOffset;
-    
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
+    if (timelineContainer && timelineTrackFill) {
+        const rect = timelineContainer.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
         
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.classList.add('active');
-                }
-            });
+        // Calculate progress ratio of timeline in screen
+        const startOffset = windowHeight / 2;
+        const totalHeight = rect.height;
+        const currentTop = rect.top;
+        
+        let progress = 0;
+        if (currentTop < startOffset) {
+            progress = (startOffset - currentTop) / totalHeight;
         }
-    });
-});
+        
+        const pct = Math.max(0, Math.min(100, progress * 100));
+        timelineTrackFill.style.height = `${pct}%`;
+    }
+}, { passive: true });
 
-// ===== PARTICLE EFFECT ON MOUSE MOVE =====
-let particles = [];
-const maxParticles = 50;
+// ===== VISITOR COUNTER =====
+const visitorCountEl = document.getElementById('visitorCount');
+if (visitorCountEl) {
+    let counts = parseInt(localStorage.getItem('visitor_counts') || '1248');
+    counts += 1;
+    localStorage.setItem('visitor_counts', counts.toString());
+    
+    // Format with thousands separator
+    visitorCountEl.textContent = counts.toLocaleString('vi-VN');
+}
 
-class Particle {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 3 - 1.5;
-        this.speedY = Math.random() * 3 - 1.5;
-        this.life = 100;
+// ===== GITHUB CONTRIBUTIONS GRID SIMULATOR =====
+const githubGrid = document.getElementById('githubGrid');
+const githubTooltip = document.getElementById('githubTooltip');
+
+if (githubGrid) {
+    // Generate dates & activities
+    const totalDays = 196; // 28 weeks
+    const levelsWeight = [0, 0, 0, 1, 1, 1, 2, 2, 3, 4];
+    
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - (totalDays - 1));
+    
+    let totalCommits = 0;
+    
+    for (let i = 0; i < totalDays; i++) {
+        const currentDate = new Date(startDate);
+        currentDate.setDate(startDate.getDate() + i);
+        
+        const level = levelsWeight[Math.floor(Math.random() * levelsWeight.length)];
+        let commits = 0;
+        if (level === 1) commits = Math.floor(Math.random() * 2) + 1;
+        else if (level === 2) commits = Math.floor(Math.random() * 3) + 3;
+        else if (level === 3) commits = Math.floor(Math.random() * 4) + 6;
+        else if (level === 4) commits = Math.floor(Math.random() * 5) + 10;
+        
+        totalCommits += commits;
+        
+        const cell = document.createElement('div');
+        cell.className = `grid-cell level-${level}`;
+        
+        const dateStr = currentDate.toLocaleDateString('vi-VN', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        // Tooltip hover actions
+        cell.addEventListener('mouseenter', () => {
+            if (githubTooltip) {
+                githubTooltip.className = 'github-tooltip active';
+                githubTooltip.innerHTML = `<strong>${commits} commits</strong> ngày ${dateStr}`;
+            }
+        });
+        
+        cell.addEventListener('mouseleave', () => {
+            if (githubTooltip) {
+                githubTooltip.className = 'github-tooltip-placeholder';
+                githubTooltip.textContent = 'Rê chuột lên ô vuông để xem chi tiết số lượng commit';
+            }
+        });
+        
+        githubGrid.appendChild(cell);
     }
     
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.life -= 2;
-        if (this.size > 0.2) this.size -= 0.05;
+    const githubTotalCommits = document.getElementById('githubTotalCommits');
+    if (githubTotalCommits) {
+        githubTotalCommits.textContent = totalCommits.toLocaleString('vi-VN');
     }
 }
 
-// Create canvas for particles
-const canvas = document.createElement('canvas');
-canvas.style.position = 'fixed';
-canvas.style.top = '0';
-canvas.style.left = '0';
-canvas.style.width = '100%';
-canvas.style.height = '100%';
-canvas.style.pointerEvents = 'none';
-canvas.style.zIndex = '9999';
-document.body.appendChild(canvas);
+// ===== PROJECT FILTER & SEARCH =====
+const projectSearch = document.getElementById('projectSearch');
+const projectFilters = document.getElementById('projectFilters');
+const projectCards = document.querySelectorAll('#projectsGrid .project-card');
+const projectsNoResults = document.getElementById('projectsNoResults');
 
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+let activeTagFilter = 'All';
+let searchKeyword = '';
 
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
-
-let lastTime = 0;
-const throttleDelay = 50; // milliseconds
-
-document.addEventListener('mousemove', (e) => {
-    const currentTime = Date.now();
-    if (currentTime - lastTime >= throttleDelay) {
-        if (particles.length < maxParticles) {
-            particles.push(new Particle(e.clientX, e.clientY));
-        }
-        lastTime = currentTime;
-    }
-});
-
-function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function filterProjects() {
+    let visibleCount = 0;
     
-    for (let i = particles.length - 1; i >= 0; i--) {
-        const particle = particles[i];
-        particle.update();
+    projectCards.forEach(card => {
+        const tags = card.getAttribute('data-tags') || '';
+        const title = card.querySelector('.project-card-title').textContent.toLowerCase();
+        const desc = card.querySelector('.project-description').textContent.toLowerCase();
         
-        // Get current theme
-        const theme = html.getAttribute('data-theme');
-        const gradient = ctx.createRadialGradient(
-            particle.x, particle.y, 0,
-            particle.x, particle.y, particle.size * 2
-        );
+        const matchesTag = activeTagFilter === 'All' || tags.split(',').includes(activeTagFilter);
+        const matchesSearch = title.includes(searchKeyword) || desc.includes(searchKeyword);
         
-        if (theme === 'dark') {
-            gradient.addColorStop(0, `rgba(102, 126, 234, ${particle.life / 100})`);
-            gradient.addColorStop(1, `rgba(118, 75, 162, 0)`);
+        if (matchesTag && matchesSearch) {
+            card.style.display = '';
+            visibleCount++;
         } else {
-            gradient.addColorStop(0, `rgba(102, 126, 234, ${particle.life / 100})`);
-            gradient.addColorStop(1, `rgba(118, 75, 162, 0)`);
+            card.style.display = 'none';
         }
-        
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fill();
-        
-        if (particle.life <= 0) {
-            particles.splice(i, 1);
-        }
-    }
+    });
     
-    requestAnimationFrame(animateParticles);
+    if (projectsNoResults) {
+        projectsNoResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
 }
 
-animateParticles();
+if (projectSearch) {
+    projectSearch.addEventListener('input', (e) => {
+        searchKeyword = e.target.value.toLowerCase();
+        filterProjects();
+    });
+}
 
-// ===== SCROLL TO TOP BUTTON =====
-const scrollTopBtn = document.createElement('button');
-scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-scrollTopBtn.classList.add('scroll-top-btn');
-scrollTopBtn.style.cssText = `
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: none;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 998;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`;
+if (projectFilters) {
+    const filterButtons = projectFilters.querySelectorAll('.filter-tag-btn');
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            activeTagFilter = btn.getAttribute('data-filter') || 'All';
+            filterProjects();
+        });
+    });
+}
 
-document.body.appendChild(scrollTopBtn);
+// ===== COMMAND PALETTE =====
+const cmdPalette = document.getElementById('cmdPalette');
+const cmdPaletteTrigger = document.getElementById('cmdPaletteTrigger');
+const cmdInput = document.getElementById('cmdInput');
+const cmdResults = document.getElementById('cmdResults');
 
+const commands = [
+    { id: 'home', label: 'Di chuyển tới Trang chủ', icon: 'fa-navigation', action: () => scrollToSection('home') },
+    { id: 'about', label: 'Di chuyển tới Giới thiệu', icon: 'fa-navigation', action: () => scrollToSection('about') },
+    { id: 'skills', label: 'Di chuyển tới Kỹ năng', icon: 'fa-navigation', action: () => scrollToSection('skills') },
+    { id: 'experience', label: 'Di chuyển tới Kinh nghiệm', icon: 'fa-navigation', action: () => scrollToSection('experience') },
+    { id: 'projects', label: 'Di chuyển tới Dự án', icon: 'fa-navigation', action: () => scrollToSection('projects') },
+    { id: 'contact', label: 'Di chuyển tới Liên hệ', icon: 'fa-navigation', action: () => scrollToSection('contact') },
+    { id: 'download-cv', label: 'Tải xuống CV của tôi (PDF)', icon: 'fa-download', action: () => downloadCV() },
+    { id: 'toggle-theme', label: 'Chuyển đổi giao diện Sáng / Tối', icon: 'fa-sun', action: () => togglePaletteTheme() }
+];
+
+let selectedCmdIndex = 0;
+let filteredCommands = [];
+
+function scrollToSection(id) {
+    const target = document.getElementById(id);
+    if (target) {
+        const offset = 80;
+        window.scrollTo({
+            top: target.offsetTop - offset,
+            behavior: 'smooth'
+        });
+        closePalette();
+    }
+}
+
+function downloadCV() {
+    const link = document.createElement('a');
+    link.href = 'cv_HongPhuc.pdf';
+    link.download = 'cv_HongPhuc.pdf';
+    link.click();
+    closePalette();
+}
+
+function togglePaletteTheme() {
+    const theme = html.getAttribute('data-theme');
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+    closePalette();
+}
+
+function renderCommands() {
+    if (!cmdResults) return;
+    cmdResults.innerHTML = '';
+    
+    filteredCommands = commands.filter(cmd => 
+        cmd.label.toLowerCase().includes(cmdInput.value.toLowerCase())
+    );
+    
+    if (filteredCommands.length === 0) {
+        cmdResults.innerHTML = '<div class="cmd-no-results">Không tìm thấy lệnh nào phù hợp...</div>';
+        return;
+    }
+    
+    filteredCommands.forEach((cmd, idx) => {
+        const item = document.createElement('div');
+        item.className = `cmd-palette-item ${idx === selectedCmdIndex ? 'selected' : ''}`;
+        
+        item.innerHTML = `
+            <div class="cmd-item-left">
+                <i class="fas ${cmd.icon === 'fa-navigation' ? 'fa-location-arrow' : cmd.icon === 'fa-download' ? 'fa-download' : 'fa-adjust'} cmd-item-icon"></i>
+                <span class="cmd-item-label">${cmd.label}</span>
+            </div>
+            ${idx === selectedCmdIndex ? '<span class="cmd-enter-badge"><i class="fas fa-level-down-alt"></i> Enter</span>' : ''}
+        `;
+        
+        item.addEventListener('click', () => {
+            cmd.action();
+        });
+        
+        item.addEventListener('mouseenter', () => {
+            selectedCmdIndex = idx;
+            renderCommands();
+        });
+        
+        cmdResults.appendChild(item);
+    });
+}
+
+function openPalette() {
+    if (!cmdPalette) return;
+    cmdPalette.style.display = 'flex';
+    cmdInput.value = '';
+    selectedCmdIndex = 0;
+    renderCommands();
+    setTimeout(() => cmdInput.focus(), 50);
+    document.body.style.overflow = 'hidden';
+}
+
+function closePalette() {
+    if (!cmdPalette) return;
+    cmdPalette.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+if (cmdPaletteTrigger) {
+    cmdPaletteTrigger.addEventListener('click', openPalette);
+}
+
+if (cmdPalette) {
+    cmdPalette.addEventListener('click', closePalette);
+    const modal = cmdPalette.querySelector('.cmd-palette-modal');
+    if (modal) {
+        modal.addEventListener('click', (e) => e.stopPropagation());
+    }
+}
+
+if (cmdInput) {
+    cmdInput.addEventListener('input', () => {
+        selectedCmdIndex = 0;
+        renderCommands();
+    });
+    
+    cmdInput.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedCmdIndex = (selectedCmdIndex + 1) % filteredCommands.length;
+            renderCommands();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedCmdIndex = (selectedCmdIndex - 1 + filteredCommands.length) % filteredCommands.length;
+            renderCommands();
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (filteredCommands[selectedCmdIndex]) {
+                filteredCommands[selectedCmdIndex].action();
+            }
+        }
+    });
+}
+
+// Global keyboard listeners
+window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (cmdPalette && cmdPalette.style.display === 'flex') {
+            closePalette();
+        } else {
+            openPalette();
+        }
+    }
+    if (e.key === '/') {
+        const active = document.activeElement;
+        if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) {
+            return;
+        }
+        e.preventDefault();
+        openPalette();
+    }
+    if (e.key === 'Escape') {
+        closePalette();
+    }
+});
+
+// ===== BACK TO TOP =====
+const backToTop = document.getElementById('backToTop');
 window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        scrollTopBtn.style.opacity = '1';
-        scrollTopBtn.style.visibility = 'visible';
-    } else {
-        scrollTopBtn.style.opacity = '0';
-        scrollTopBtn.style.visibility = 'hidden';
+    if (backToTop) {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
     }
-});
+}, { passive: true });
 
-scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+if (backToTop) {
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-});
-
-scrollTopBtn.addEventListener('mouseenter', () => {
-    scrollTopBtn.style.transform = 'translateY(-5px) scale(1.1)';
-    scrollTopBtn.style.boxShadow = '0 10px 15px rgba(0, 0, 0, 0.2)';
-});
-
-scrollTopBtn.addEventListener('mouseleave', () => {
-    scrollTopBtn.style.transform = 'translateY(0) scale(1)';
-    scrollTopBtn.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-});
-
-// ===== CURSOR EFFECT =====
-const cursor = document.createElement('div');
-const cursorFollower = document.createElement('div');
-
-cursor.style.cssText = `
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    pointer-events: none;
-    z-index: 10000;
-    transition: transform 0.1s ease;
-    mix-blend-mode: difference;
-`;
-
-cursorFollower.style.cssText = `
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid rgba(102, 126, 234, 0.5);
-    pointer-events: none;
-    z-index: 9999;
-    transition: all 0.3s ease;
-`;
-
-document.body.appendChild(cursor);
-document.body.appendChild(cursorFollower);
-
-let mouseX = 0;
-let mouseY = 0;
-let followerX = 0;
-let followerY = 0;
-
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    
-    cursor.style.left = mouseX - 5 + 'px';
-    cursor.style.top = mouseY - 5 + 'px';
-});
-
-function animateCursorFollower() {
-    followerX += (mouseX - followerX) * 0.1;
-    followerY += (mouseY - followerY) * 0.1;
-    
-    cursorFollower.style.left = followerX - 20 + 'px';
-    cursorFollower.style.top = followerY - 20 + 'px';
-    
-    requestAnimationFrame(animateCursorFollower);
 }
-
-animateCursorFollower();
-
-// Expand cursor on hover over interactive elements
-const interactiveElements = document.querySelectorAll('a, button, .project-card, .info-card');
-
-interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'scale(2)';
-        cursorFollower.style.transform = 'scale(1.5)';
-    });
-    
-    el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'scale(1)';
-        cursorFollower.style.transform = 'scale(1)';
-    });
-});
-
-// Hide custom cursor on mobile
-if (window.innerWidth <= 968) {
-    cursor.style.display = 'none';
-    cursorFollower.style.display = 'none';
-}
-
-// ===== PRELOADER =====
-window.addEventListener('load', () => {
-    // Add fade in animation to body
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease';
-        document.body.style.opacity = '1';
-    }, 100);
-});
 
 // ===== CONSOLE MESSAGE =====
-console.log('%c👨‍💻 Nguyễn Trọng Hồng Phúc', 'color: #667eea; font-size: 20px; font-weight: bold;');
-console.log('%c🚀 AI Engineer Portfolio', 'color: #764ba2; font-size: 16px;');
-console.log('%c📧 hongphucnguyentrong@gmail.com', 'color: #667eea; font-size: 14px;');
-console.log('%c⭐ Made with passion and dedication', 'color: #f093fb; font-size: 12px;');
+console.log('%c👨‍💻 Nguyễn Trọng Hồng Phúc', 'color: #6366f1; font-size: 20px; font-weight: bold;');
+console.log('%c🚀 AI Engineer Portfolio Redesigned (2026 Edition)', 'color: #06b6d4; font-size: 16px;');

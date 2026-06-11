@@ -50,8 +50,14 @@ export const projects: Project[] = [
     github: 'https://github.com/moimoi05/ENGLISH-VIETNAMESE-TRANSLATION-FOR-MEDICAL-PURPOSES',
     params: '90.5M tham số',
     icon: 'language',
-    backgroundImage: '/cv_pic.jpg',
-    demoImages: ['/cv_pic.jpg'],
+  },
+  {
+    title: 'Hệ thống Phát hiện Đối tượng',
+    description:
+      'Xây dựng hệ thống phát hiện vật thể trong ảnh từ đầu với 5 nhãn, thực hiện kỹ thuật fine-tuning từ mô hình ConvNeXt.',
+    tags: ['Computer Vision', 'ConvNeXt', 'Fine-tuning', 'PyTorch'],
+    github: 'https://github.com/Hongphuc05/object-detection',
+    icon: 'eye',
   },
   {
     title: 'Quản lý học sinh trên xe đưa đón',
@@ -60,18 +66,14 @@ export const projects: Project[] = [
     tags: ['YOLOv8', 'FaceNet', 'Computer Vision', 'Backend'],
     github: 'https://github.com/thangtrandoan/thptht_AI',
     icon: 'bus',
-    backgroundImage: '/QuanLi.jpg',
-    demoImages: ['/QuanLi.jpg', '/QuanLi2.jpg'],
   },
   {
     title: 'Phân tích Topic & Sentiment',
     description:
       'Phân tích chủ đề và cảm xúc của văn bản tiếng Việt sử dụng PhoBERT (SOTA) với tập dữ liệu 20GB văn bản. Áp dụng Threshold Tuning để xử lý dữ liệu mất cân bằng.',
     tags: ['PhoBERT', 'NLP', 'Sentiment Analysis', 'Threshold Tuning'],
-    github: 'https://github.com/Hongphuc05/demo-web-Phân-tích-chủ-đề-và-cảm-xúc-của-văn-bản',
+    github: 'https://github.com/Hongphuc05/demo-web',
     icon: 'comments',
-    backgroundImage: '/Topic&Sentiment.png',
-    demoImages: ['/Topic&Sentiment.png', '/Topic&Sentiment2.png'],
   },
 ];
 

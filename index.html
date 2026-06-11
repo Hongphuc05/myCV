@@ -1,19 +1,38 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyễn Trọng Hồng Phúc - AI Portfolio</title>
+    <title>Nguyễn Trọng Hồng Phúc - AI Engineer Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <i class="fas fa-sun"></i>
-        <i class="fas fa-moon"></i>
-    </button>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <svg class="logo-svg" viewBox="0 0 100 100">
+                <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="url(#svg-glow-gradient)" stroke-width="3"></polygon>
+                <path d="M 32 30 L 32 70 M 32 50 L 48 50 M 48 30 L 48 70" fill="none" stroke="var(--text-primary)" stroke-width="5" stroke-linecap="round"></path>
+                <path d="M 56 70 L 56 30 L 68 30 C 74 30 74 46 68 46 L 56 46" fill="none" stroke="var(--text-primary)" stroke-width="5" stroke-linecap="round"></path>
+                <defs>
+                    <linearGradient id="svg-glow-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#8b5cf6"></stop>
+                        <stop offset="100%" stop-color="#06b6d4"></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div class="loading-bar-container">
+                <div class="loading-bar-fill" id="loadingBarFill"></div>
+            </div>
+            <div class="loading-text">INITIALIZING AI PORTFOLIO v2026...</div>
+        </div>
+    </div>
+
+    <!-- Background grid decoration -->
+    <div class="tech-bg-container">
+        <div class="tech-grid"></div>
+    </div>
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -40,27 +59,37 @@
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-text">
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        <span>Sẵn sàng cho các cơ hội mới</span>
+                    </div>
                     <p class="hero-greeting">Xin chào, tôi là</p>
                     <h1 class="hero-name">Nguyễn Trọng Hồng Phúc</h1>
                     <h2 class="hero-title">
-                        <span class="typing-text"></span>
+                        <span class="typing-text-gradient typing-text"></span>
                         <span class="cursor">|</span>
                     </h2>
                     <p class="hero-description">
-                        Sinh viên ngành Trí tuệ nhân tạo với đam mê xây dựng các hệ thống thông minh 
-                        và giải pháp tự động hóa để giải quyết bài toán thực tế.
+                        Tôi là sinh viên ngành Trí tuệ nhân tạo, có nền tảng về Machine Learning, phát triển phần mềm và các công cụ tự động hóa. Tôi mong muốn được tham gia vào môi trường làm việc thực tế để áp dụng kiến thức AI, xây dựng hệ thống phần mềm và triển khai các giải pháp tự động hóa nhằm giải quyết bài toán doanh nghiệp. Trong dài hạn, tôi định hướng phát triển trở thành AI Engineer có khả năng thiết kế, phát triển và vận hành các hệ thống thông minh ở môi trường production.
                     </p>
                     <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">Liên hệ với tôi</a>
-                        <a href="#projects" class="btn btn-secondary">Xem dự án</a>
+                        <a href="cv_HongPhuc.pdf" download="cv_HongPhuc.pdf" class="btn btn-primary">
+                            <i class="fas fa-download"></i> Tải CV của tôi
+                        </a>
+                        <a href="#projects" class="btn btn-secondary">
+                            <i class="fas fa-arrow-right"></i> Dự án
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i> Liên hệ
+                        </a>
                     </div>
                 </div>
                 <div class="hero-image">
                     <div class="image-container">
-                        <div class="floating-icon icon-1"><i class="fas fa-brain"></i></div>
-                        <div class="floating-icon icon-2"><i class="fas fa-code"></i></div>
-                        <div class="floating-icon icon-3"><i class="fas fa-robot"></i></div>
-                        <div class="floating-icon icon-4"><i class="fas fa-chart-line"></i></div>
+                        <div class="profile-aura"></div>
+                        <div class="profile-image-wrapper">
+                            <img src="frontend/public/cv_pic.jpg" alt="Nguyễn Trọng Hồng Phúc" class="profile-image">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -72,32 +101,122 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Stats Dashboard Section -->
+    <section id="stats" class="stats-section">
+        <div class="container">
+            <div class="stats-header">
+                <span class="stats-badge">Personal Analytics</span>
+                <h2 class="stats-section-title">Chỉ số hoạt động</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card glass-card" style="--glow-color: rgba(139, 92, 246, 0.15)">
+                    <div class="stat-glow-effect"></div>
+                    <div class="stat-card-content">
+                        <div class="stat-top">
+                            <div class="stat-icon-wrapper" style="background: rgba(139, 92, 246, 0.15)">
+                                <i class="fas fa-brain stat-icon"></i>
+                           </div>
+                           <span class="stat-value-gradient" style="background-image: linear-gradient(135deg, #8b5cf6, #6366f1)">15+</span>
+                        </div>
+                        <h3 class="stat-label">Mô hình AI huấn luyện</h3>
+                        <p class="stat-desc">ConvNeXt, YOLOv8, Transformer, FaceNet</p>
+                    </div>
+                </div>
+                <div class="stat-card glass-card" style="--glow-color: rgba(6, 182, 212, 0.15)">
+                    <div class="stat-glow-effect"></div>
+                    <div class="stat-card-content">
+                        <div class="stat-top">
+                            <div class="stat-icon-wrapper" style="background: rgba(6, 182, 212, 0.15)">
+                                <i class="fas fa-database stat-icon"></i>
+                            </div>
+                            <span class="stat-value-gradient" style="background-image: linear-gradient(135deg, #06b6d4, #10b981)">180 GB+</span>
+                        </div>
+                        <h3 class="stat-label">Dữ liệu đã tiền xử lý</h3>
+                        <p class="stat-desc">Dữ liệu ảnh, văn bản y tế, camera giao thông</p>
+                    </div>
+                </div>
+                <div class="stat-card glass-card" style="--glow-color: rgba(99, 102, 241, 0.15)">
+                    <div class="stat-glow-effect"></div>
+                    <div class="stat-card-content">
+                        <div class="stat-top">
+                            <div class="stat-icon-wrapper" style="background: rgba(99, 102, 241, 0.15)">
+                                <i class="fas fa-code-branch stat-icon"></i>
+                            </div>
+                            <span class="stat-value-gradient" style="background-image: linear-gradient(135deg, #6366f1, #8b5cf6)">900+</span>
+                        </div>
+                        <h3 class="stat-label">GitHub Contributions</h3>
+                        <p class="stat-desc">Lưu trữ mã nguồn chất lượng cao</p>
+                    </div>
+                </div>
+                <div class="stat-card glass-card" style="--glow-color: rgba(16, 185, 129, 0.15)">
+                    <div class="stat-glow-effect"></div>
+                    <div class="stat-card-content">
+                        <div class="stat-top">
+                            <div class="stat-icon-wrapper" style="background: rgba(16, 185, 129, 0.15)">
+                                <i class="fas fa-trophy stat-icon"></i>
+                            </div>
+                            <span class="stat-value-gradient" style="background-image: linear-gradient(135deg, #10b981, #06b6d4)">94.6%</span>
+                        </div>
+                        <h3 class="stat-label">Độ chính xác trung bình</h3>
+                        <p class="stat-desc">Đánh giá trên bộ test chuyên biệt</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Bento Grid) -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">Về tôi</h2>
-            <div class="about-content">
-                <div class="about-info">
-                    <div class="info-card">
-                        <i class="fas fa-graduation-cap"></i>
+            <h2 class="section-title">Giới thiệu</h2>
+            <div class="about-grid">
+                <!-- Main Card: Goal -->
+                <div class="about-card main-card glass-card">
+                    <div class="card-header">
+                        <i class="fas fa-bullseye card-icon glow-icon"></i>
+                        <h3>Mục tiêu nghề nghiệp</h3>
+                    </div>
+                    <p class="goal-text">
+                        Tôi là sinh viên ngành Trí tuệ nhân tạo, có nền tảng về Machine Learning, phát triển phần mềm và các công cụ tự động hóa. Tôi mong muốn được tham gia vào môi trường làm việc thực tế để áp dụng kiến thức AI, xây dựng hệ thống phần mềm và triển khai các giải pháp tự động hóa nhằm giải quyết bài toán doanh nghiệp. Trong dài hạn, tôi định hướng phát triển trở thành AI Engineer có khả năng thiết kế, phát triển và vận hành các hệ thống thông minh ở môi trường production.
+                    </p>
+                    <div class="intro-badges">
+                        <span class="intro-badge">Deep Learning</span>
+                        <span class="intro-badge">Computer Vision</span>
+                        <span class="intro-badge">MLOps</span>
+                        <span class="intro-badge">AI Deployment</span>
+                    </div>
+                </div>
+
+                <!-- Education Card -->
+                <div class="about-card education-card glass-card">
+                    <div class="card-header">
+                        <i class="fas fa-graduation-cap card-icon glow-icon"></i>
                         <h3>Học vấn</h3>
-                        <p>Trường ĐH Công nghệ - ĐHQG Hà Nội</p>
-                        <p class="highlight">Trí Tuệ Nhân Tạo - GPA: 3.0</p>
-                        <p class="date">08/2016 - 06/2020</p>
                     </div>
-                    <div class="info-card">
-                        <i class="fas fa-trophy"></i>
+                    <h4 class="school-name">Trường Đại học Công nghệ - ĐHQGHN</h4>
+                    <div class="school-details">
+                        <span class="school-major">Ngành: Trí tuệ nhân tạo</span>
+                        <span class="school-gpa">GPA: 3.0</span>
+                    </div>
+                    <p class="school-period">08/2016 - 06/2020</p>
+                </div>
+
+                <!-- Achievements Card -->
+                <div class="about-card achievements-card glass-card">
+                    <div class="card-header">
+                        <i class="fas fa-trophy card-icon glow-icon"></i>
                         <h3>Thành tựu</h3>
-                        <ul>
-                            <li>Top 10% Naver Hackathon</li>
-                            <li>Giải khuyến khích UET Makathon</li>
-                        </ul>
                     </div>
-                    <div class="info-card">
-                        <i class="fas fa-bullseye"></i>
-                        <h3>Mục tiêu</h3>
-                        <p>Phát triển thành AI Engineer có khả năng thiết kế và vận hành các hệ thống thông minh trong môi trường production.</p>
-                    </div>
+                    <ul class="achievement-list">
+                        <li>
+                            <i class="fas fa-check check-icon"></i>
+                            <span>Chung kết 10% thí sinh xuất sắc Naver Hackathon</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check check-icon"></i>
+                            <span>Giải khuyến khích UET Makathon</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -106,126 +225,168 @@
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="section-title">Kỹ năng</h2>
+            <h2 class="section-title">Kỹ năng & Công nghệ</h2>
             <div class="skills-grid">
-                <div class="skill-category">
+                <!-- AI/ML Category -->
+                <div class="skill-category glass-card">
                     <div class="category-header">
-                        <i class="fas fa-brain"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-brain category-icon glow-icon"></i>
+                        </div>
                         <h3>Machine Learning & AI</h3>
                     </div>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Python</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="90"></div>
-                            </div>
+                    <div class="skill-items-grid">
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #3776ab; --hover-shadow: rgba(55, 118, 171, 0.1);">
+                            <span class="skill-dot" style="background-color: #3776ab;"></span>
+                            Python
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">TensorFlow / PyTorch</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="85"></div>
-                            </div>
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #ee4c2c; --hover-shadow: rgba(238, 76, 44, 0.1);">
+                            <span class="skill-dot" style="background-color: #ee4c2c;"></span>
+                            TensorFlow / PyTorch
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Deep Learning</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="80"></div>
-                            </div>
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #ee4c2c; --hover-shadow: rgba(238, 76, 44, 0.1);">
+                            <span class="skill-dot" style="background-color: #ee4c2c;"></span>
+                            Deep Learning
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Data Preprocessing</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="85"></div>
-                            </div>
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #6366f1; --hover-shadow: rgba(99, 102, 241, 0.1);">
+                            <span class="skill-dot" style="background-color: #6366f1;"></span>
+                            Data Preprocessing
                         </div>
                     </div>
                 </div>
 
-                <div class="skill-category">
+                <!-- Software Development Category -->
+                <div class="skill-category glass-card">
                     <div class="category-header">
-                        <i class="fas fa-code"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-code category-icon glow-icon"></i>
+                        </div>
                         <h3>Software Development</h3>
                     </div>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">FastAPI / Spring Boot</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="75"></div>
-                            </div>
+                    <div class="skill-items-grid">
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #10b981; --hover-shadow: rgba(16, 185, 129, 0.1);">
+                            <span class="skill-dot" style="background-color: #10b981;"></span>
+                            FastAPI / Spring Boot
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">RESTful API</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="80"></div>
-                            </div>
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #10b981; --hover-shadow: rgba(16, 185, 129, 0.1);">
+                            <span class="skill-dot" style="background-color: #10b981;"></span>
+                            RESTful API
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">SQL (MySQL/PostgreSQL)</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="70"></div>
-                            </div>
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #6366f1; --hover-shadow: rgba(99, 102, 241, 0.1);">
+                            <span class="skill-dot" style="background-color: #6366f1;"></span>
+                            SQL (MySQL/PostgreSQL)
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Git</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="85"></div>
-                            </div>
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #f05032; --hover-shadow: rgba(240, 80, 50, 0.1);">
+                            <span class="skill-dot" style="background-color: #f05032;"></span>
+                            Git
                         </div>
                     </div>
                 </div>
 
-                <div class="skill-category">
+                <!-- Automation Category -->
+                <div class="skill-category glass-card">
                     <div class="category-header">
-                        <i class="fas fa-robot"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-robot category-icon glow-icon"></i>
+                        </div>
                         <h3>Automation & Testing</h3>
                     </div>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Selenium / Playwright</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="80"></div>
-                            </div>
+                    <div class="skill-items-grid">
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #06b6d4; --hover-shadow: rgba(6, 182, 212, 0.1);">
+                            <span class="skill-dot" style="background-color: #06b6d4;"></span>
+                            Selenium / Playwright
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Web Scraping</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="85"></div>
-                            </div>
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #06b6d4; --hover-shadow: rgba(6, 182, 212, 0.1);">
+                            <span class="skill-dot" style="background-color: #06b6d4;"></span>
+                            Web Scraping
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">CI/CD</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="70"></div>
-                            </div>
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #6366f1; --hover-shadow: rgba(99, 102, 241, 0.1);">
+                            <span class="skill-dot" style="background-color: #6366f1;"></span>
+                            CI/CD
                         </div>
                     </div>
                 </div>
 
-                <div class="skill-category">
+                <!-- DevOps Category -->
+                <div class="skill-category glass-card">
                     <div class="category-header">
-                        <i class="fas fa-cloud"></i>
+                        <div class="icon-wrapper">
+                            <i class="fas fa-cloud category-icon glow-icon"></i>
+                        </div>
                         <h3>DevOps & Cloud</h3>
                     </div>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span class="skill-name">Docker</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="75"></div>
-                            </div>
+                    <div class="skill-items-grid">
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #2496ed; --hover-shadow: rgba(36, 150, 237, 0.1);">
+                            <span class="skill-dot" style="background-color: #2496ed;"></span>
+                            Docker
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">GitHub Actions</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="70"></div>
-                            </div>
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #6366f1; --hover-shadow: rgba(99, 102, 241, 0.1);">
+                            <span class="skill-dot" style="background-color: #6366f1;"></span>
+                            GitHub Actions
                         </div>
-                        <div class="skill-item">
-                            <span class="skill-name">AWS / GCP</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="60"></div>
-                            </div>
+                        <div class="skill-badge-item" style="border: 1px solid var(--border-color); --hover-border: #ff9900; --hover-shadow: rgba(255, 153, 0, 0.1);">
+                            <span class="skill-dot" style="background-color: #ff9900;"></span>
+                            AWS / GCP (Cơ bản)
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Github Activity Section -->
+    <section id="github-activity" class="github-section">
+        <div class="container">
+            <div class="github-card glass-card">
+                <div class="github-header">
+                    <div class="github-title-wrapper">
+                        <i class="fab fa-github github-logo"></i>
+                        <div>
+                            <h3>Hoạt động GitHub</h3>
+                            <p class="github-username">@Hongphuc05</p>
+                        </div>
+                    </div>
+                    <a href="https://github.com/Hongphuc05" target="_blank" class="btn btn-secondary github-link-btn">
+                        Xem GitHub chính thức <i class="fas fa-external-link-alt" style="margin-left: 5px;"></i>
+                    </a>
+                </div>
+                <div class="github-stats-summary">
+                    <div class="summary-item">
+                        <span class="summary-num" id="githubTotalCommits">728</span>
+                        <span class="summary-lbl">Commits trong 6 tháng qua</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-num">98.4%</span>
+                        <span class="summary-lbl">Tỷ lệ thành công build CI/CD</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-num">4</span>
+                        <span class="summary-lbl">Dự án công khai chính</span>
+                    </div>
+                </div>
+                <div class="github-grid-container">
+                    <div class="days-label">
+                        <span>T2</span>
+                        <span>T4</span>
+                        <span>T6</span>
+                    </div>
+                    <div class="github-grid" id="githubGrid">
+                        <!-- populated dynamically in script.js -->
+                    </div>
+                </div>
+                <div class="github-tooltip-holder">
+                    <div class="github-tooltip-placeholder" id="githubTooltip">
+                        Rê chuột lên ô vuông để xem chi tiết số lượng commit
+                    </div>
+                </div>
+                <div class="github-legend">
+                    <span>Ít hơn</span>
+                    <div class="legend-cell level-0"></div>
+                    <div class="legend-cell level-1"></div>
+                    <div class="legend-cell level-2"></div>
+                    <div class="legend-cell level-3"></div>
+                    <div class="legend-cell level-4"></div>
+                    <span>Nhiều hơn</span>
                 </div>
             </div>
         </div>
@@ -234,21 +395,116 @@
     <!-- Experience Section -->
     <section id="experience" class="experience">
         <div class="container">
-            <h2 class="section-title">Kinh nghiệm</h2>
-            <div class="timeline">
+            <h2 class="section-title">Kinh nghiệm làm việc</h2>
+            <div class="timeline-container">
+                <div class="timeline-track-bg"></div>
+                <div class="timeline-track-fill" id="timelineTrackFill"></div>
+                <div class="timeline">
+                <!-- Hospital 108 -->
                 <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">12/2025 - Hiện tại</div>
+                    <div class="timeline-dot-wrapper">
+                        <div class="timeline-dot-glow"></div>
+                        <div class="timeline-dot">
+                            <i class="fas fa-briefcase timeline-icon"></i>
+                        </div>
+                    </div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <span class="timeline-date">12/2025 - Hiện tại</span>
+                            <span class="timeline-location">
+                                <i class="fas fa-map-marker-alt"></i> Khoa Trang Bị
+                            </span>
+                        </div>
                         <h3>Thực Tập Sinh Phần Mềm</h3>
-                        <h4>Bệnh Viện Trung Ương Quân Đội 108</h4>
-                        <p class="timeline-location"><i class="fas fa-map-marker-alt"></i> Khoa Trang Bị</p>
-                        <p>Phát triển website quản lý vật tư y tế của bệnh viện</p>
+                        <h4 class="timeline-company">Bệnh Viện Trung Ương Quân Đội 108</h4>
+                        <p class="timeline-desc">Phát triển website quản lý vật tư y tế của bệnh viện.</p>
+                        <div class="timeline-achievements-title">Kết quả đạt được:</div>
                         <ul class="achievements">
-                            <li>Học được cách triển khai một dự án phần mềm hoàn chỉnh</li>
-                            <li>Làm việc với API và database nội bộ</li>
-                            <li>Phát triển kỹ năng làm việc nhóm trong môi trường thực tế</li>
+                            <li>
+                                <span class="bullet-point"></span>
+                                <span>Học được cách triển khai một dự án phần mềm hoàn chỉnh.</span>
+                            </li>
+                            <li>
+                                <span class="bullet-point"></span>
+                                <span>Làm việc trực tiếp với API và database nội bộ.</span>
+                            </li>
+                            <li>
+                                <span class="bullet-point"></span>
+                                <span>Phát triển kỹ năng làm việc nhóm và thiết kế hệ thống trong môi trường thực tế.</span>
+                            </li>
                         </ul>
+                    </div>
+                </div>
+            </div> <!-- end of timeline -->
+            </div> <!-- end of timeline-container -->
+        </div>
+    </section>
+
+    <!-- Certificates & Achievements Section -->
+    <section id="certificates" class="certs-section">
+        <div class="container">
+            <div class="certs-header">
+                <span class="certs-badge">Chứng chỉ & Giải thưởng</span>
+                <h2 class="certs-title">Thành tựu nổi bật</h2>
+            </div>
+            <div class="certs-grid">
+                <div class="cert-card glass-card">
+                    <div class="cert-glow"></div>
+                    <div class="cert-content">
+                        <div class="cert-top">
+                            <div class="cert-icon-box">
+                                <i class="fas fa-award cert-icon"></i>
+                            </div>
+                            <span class="cert-date">
+                                <i class="far fa-calendar-alt calendar-icon"></i> 10/2020
+                            </span>
+                        </div>
+                        <h3 class="cert-card-title">Chung kết 10% thí sinh xuất sắc Naver Hackathon</h3>
+                        <h4 class="cert-issuer">Naver Vietnam & UET</h4>
+                        <p class="cert-desc">Phát triển mô hình Deep Learning nhận dạng vật thể và hành vi bất thường trong hệ thống an ninh giám sát thông minh.</p>
+                        <div class="cert-footer">
+                           <a href="#" class="cert-link">Xem chứng nhận <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Award 2 -->
+                <div class="cert-card glass-card">
+                    <div class="cert-glow"></div>
+                    <div class="cert-content">
+                        <div class="cert-top">
+                            <div class="cert-icon-box">
+                                <i class="fas fa-award cert-icon"></i>
+                            </div>
+                            <span class="cert-date">
+                                <i class="far fa-calendar-alt calendar-icon"></i> 11/2019
+                            </span>
+                        </div>
+                        <h3 class="cert-card-title">Giải khuyến khích UET Makathon</h3>
+                        <h4 class="cert-issuer">Trường Đại học Công nghệ - ĐHQGHN</h4>
+                        <p class="cert-desc">Thiết hệ thống thiết bị IoT giám sát và cảnh báo rò rỉ khí gas tích hợp mạng nơ-ron đánh giá độ rủi ro cháy nổ.</p>
+                        <div class="cert-footer">
+                           <a href="#" class="cert-link">Xem chứng nhận <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- DL Cert -->
+                <div class="cert-card glass-card">
+                    <div class="cert-glow"></div>
+                    <div class="cert-content">
+                        <div class="cert-top">
+                            <div class="cert-icon-box">
+                                <i class="fas fa-award cert-icon"></i>
+                            </div>
+                            <span class="cert-date">
+                                <i class="far fa-calendar-alt calendar-icon"></i> 05/2023
+                            </span>
+                        </div>
+                        <h3 class="cert-card-title">Chứng chỉ Deep Learning Specialization</h3>
+                        <h4 class="cert-issuer">DeepLearning.AI / Coursera</h4>
+                        <p class="cert-desc">Nắm vững lý thuyết mạng nơ-ron (RNN, CNN, Transformers) và thực hành xây dựng mô hình học sâu chuyên sâu.</p>
+                        <div class="cert-footer">
+                           <a href="#" class="cert-link">Xem chứng nhận <i class="fas fa-external-link-alt"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -258,115 +514,280 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">Dự án nổi bật</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-language"></i>
-                    </div>
+            <div class="projects-header">
+                <span class="projects-badge">Portfolio</span>
+                <h2 class="projects-section-title">Dự án tiêu biểu</h2>
+                <p class="projects-subtitle">Tìm kiếm dự án và lọc theo công nghệ sử dụng</p>
+            </div>
+
+            <!-- Search & Filter Controls -->
+            <div class="projects-controls">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search search-bar-icon"></i>
+                    <input type="text" id="projectSearch" placeholder="Tìm kiếm dự án..." class="projects-search-input">
+                </div>
+                <div class="projects-filter-tags" id="projectFilters">
+                    <button class="filter-tag-btn active" data-filter="All"><i class="fas fa-layer-group"></i> Tất cả</button>
+                    <button class="filter-tag-btn" data-filter="Transformer">Transformer</button>
+                    <button class="filter-tag-btn" data-filter="NLP">NLP</button>
+                    <button class="filter-tag-btn" data-filter="PyTorch">PyTorch</button>
+                    <button class="filter-tag-btn" data-filter="Computer Vision">Computer Vision</button>
+                    <button class="filter-tag-btn" data-filter="ConvNeXt">ConvNeXt</button>
+                    <button class="filter-tag-btn" data-filter="Fine-tuning">Fine-tuning</button>
+                    <button class="filter-tag-btn" data-filter="YOLOv8">YOLOv8</button>
+                </div>
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Project 1: Medical Translation -->
+                <div class="project-card glass-card featured" data-tags="Transformer,NLP,PyTorch,Fine-tuning">
+                    <div class="project-glow-border"></div>
                     <div class="project-content">
-                        <h3>Dịch máy Anh - Việt cho Y tế</h3>
-                        <p class="project-params">90.5M tham số</p>
+                        <div class="project-top-row">
+                            <div class="project-icon-glow-wrapper">
+                                <i class="fas fa-language project-header-icon"></i>
+                            </div>
+                            <div class="project-meta-badges">
+                                <span class="featured-badge-static">Nổi bật</span>
+                                <span class="params-badge-static">90.5M tham số</span>
+                            </div>
+                        </div>
+                        <h3 class="project-card-title">Dịch máy Anh - Việt cho Y tế</h3>
                         <p class="project-description">
-                            Xây dựng kiến trúc Transformer từ đầu để hiểu sâu cơ chế hoạt động. 
-                            Fine-tuning mô hình Baseline trên dữ liệu y tế chuyên biệt hóa.
+                            Xây dựng kiến trúc Transformer từ đầu (không dùng thư viện có sẵn hàm 'Transformer' mức cao) để hiểu sâu cơ chế hoạt động. Thu thập và xử lý bộ dữ liệu song ngữ chuyên ngành Y tế chất lượng cao. Huấn luyện mô hình cơ sở (Baseline) trên dữ liệu phổ thông và fine-tuning chuyên biệt hóa cho tác vụ y tế.
                         </p>
                         <div class="project-tags">
-                            <span class="tag">Transformer</span>
-                            <span class="tag">NLP</span>
-                            <span class="tag">PyTorch</span>
-                            <span class="tag">Fine-tuning</span>
+                            <span class="tech-tag">Transformer</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">Fine-tuning</span>
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/moimoi05/ENGLISH-VIETNAMESE-TRANSLATION-FOR-MEDICAL-PURPOSES" target="_blank" class="project-link">
-                                <i class="fab fa-github"></i> GitHub
+                        <div class="project-footer">
+                            <a href="https://github.com/moimoi05/ENGLISH-VIETNAMESE-TRANSLATION-FOR-MEDICAL-PURPOSES" target="_blank" class="project-link btn btn-secondary">
+                                <i class="fab fa-github"></i> GitHub Repository
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-bus"></i>
-                    </div>
+                <!-- Project 2: Object Detection -->
+                <div class="project-card glass-card featured" data-tags="Computer Vision,ConvNeXt,Fine-tuning,PyTorch">
+                    <div class="project-glow-border"></div>
                     <div class="project-content">
-                        <h3>Quản lý học sinh trên xe đưa đón</h3>
+                        <div class="project-top-row">
+                            <div class="project-icon-glow-wrapper">
+                                <i class="fas fa-eye project-header-icon"></i>
+                            </div>
+                            <div class="project-meta-badges">
+                                <span class="featured-badge-static">Nổi bật</span>
+                            </div>
+                        </div>
+                        <h3 class="project-card-title">Hệ thống Phát hiện Đối tượng</h3>
                         <p class="project-description">
-                            Hệ thống nhận dạng và quản lý người ra vào trên xe đưa đón học sinh sử dụng 
-                            YOLOv8 và FaceNet để nhận diện mặt học sinh.
+                            Xây dựng hệ thống phát hiện vật thể trong ảnh từ đầu với 5 nhãn, thực hiện kỹ thuật fine-tuning từ mô hình ConvNeXt.
                         </p>
                         <div class="project-tags">
-                            <span class="tag">YOLOv8</span>
-                            <span class="tag">FaceNet</span>
-                            <span class="tag">Computer Vision</span>
-                            <span class="tag">Backend</span>
+                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">ConvNeXt</span>
+                            <span class="tech-tag">Fine-tuning</span>
+                            <span class="tech-tag">PyTorch</span>
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/thangtrandoan/thptht_AI" target="_blank" class="project-link">
-                                <i class="fab fa-github"></i> GitHub
+                        <div class="project-footer">
+                            <a href="https://github.com/Hongphuc05/object-detection" target="_blank" class="project-link btn btn-secondary">
+                                <i class="fab fa-github"></i> GitHub Repository
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-comments"></i>
-                    </div>
+                <!-- Project 3: School Bus Tracker -->
+                <div class="project-card glass-card" data-tags="YOLOv8,FaceNet,Computer Vision,Backend">
+                    <div class="project-glow-border"></div>
                     <div class="project-content">
-                        <h3>Phân tích Topic & Sentiment</h3>
+                        <div class="project-top-row">
+                            <div class="project-icon-glow-wrapper">
+                                <i class="fas fa-bus project-header-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-card-title">Quản lý học sinh trên xe đưa đón</h3>
                         <p class="project-description">
-                            Phân tích chủ đề và cảm xúc của văn bản tiếng Việt sử dụng PhoBERT (SOTA) 
-                            với tập dữ liệu 20GB văn bản. Áp dụng Threshold Tuning để xử lý dữ liệu mất cân bằng.
+                            Hệ thống nhận dạng và quản lý người ra vào trên xe đưa đón học sinh sử dụng YOLOv8 để phát hiện người và FaceNet (MTCNN + InceptionResnetV1) để nhận diện mặt học sinh hoặc người lạ khi lên xuống xe. Xử lý backend và gửi danh sách lên website nhà trường.
                         </p>
                         <div class="project-tags">
-                            <span class="tag">PhoBERT</span>
-                            <span class="tag">NLP</span>
-                            <span class="tag">Sentiment Analysis</span>
-                            <span class="tag">Threshold Tuning</span>
+                            <span class="tech-tag">YOLOv8</span>
+                            <span class="tech-tag">FaceNet</span>
+                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">Backend</span>
                         </div>
-                        <div class="project-links">
-                            <a href="https://github.com/Hongphuc05/demo-web-Phân-tích-chủ-đề-và-cảm-xúc-của-văn-bản" target="_blank" class="project-link">
-                                <i class="fab fa-github"></i> GitHub
+                        <div class="project-footer">
+                            <a href="https://github.com/thangtrandoan/thptht_AI" target="_blank" class="project-link btn btn-secondary">
+                                <i class="fab fa-github"></i> GitHub Repository
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Topic & Sentiment -->
+                <div class="project-card glass-card" data-tags="PhoBERT,NLP,Sentiment Analysis,Threshold Tuning">
+                    <div class="project-glow-border"></div>
+                    <div class="project-content">
+                        <div class="project-top-row">
+                            <div class="project-icon-glow-wrapper">
+                                <i class="fas fa-comments project-header-icon"></i>
+                            </div>
+                        </div>
+                        <h3 class="project-card-title">Phân tích Topic & Sentiment</h3>
+                        <p class="project-description">
+                            Phân tích chủ đề và cảm xúc của văn bản tiếng Việt sử dụng PhoBERT (SOTA) với tập dữ liệu khổng lồ (20GB văn bản). Áp dụng kỹ thuật Threshold Tuning để dò ngưỡng nhằm xử lý hiệu quả bài toán dữ liệu mất cân bằng nặng giữa các nhãn.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tech-tag">PhoBERT</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">Sentiment Analysis</span>
+                            <span class="tech-tag">Threshold Tuning</span>
+                        </div>
+                        <div class="project-footer">
+                            <a href="https://github.com/Hongphuc05/demo-web" target="_blank" class="project-link btn btn-secondary">
+                                <i class="fab fa-github"></i> GitHub Repository
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="projects-no-results" id="projectsNoResults" style="display: none;">
+                Không tìm thấy dự án nào phù hợp với bộ lọc hiện tại...
+            </div>
         </div>
     </section>
+
+    <!-- Blog & Knowledge Sharing Section -->
+    <section id="blog" class="blog-section">
+        <div class="container">
+            <div class="blog-header">
+                <span class="blog-badge">Knowledge Base</span>
+                <h2 class="blog-title">Bài viết chia sẻ</h2>
+            </div>
+            <div class="blog-grid">
+                <article class="blog-card glass-card">
+                    <div class="blog-content">
+                        <div class="blog-top">
+                            <div class="blog-tags">
+                                <span class="blog-tag">Computer Vision</span>
+                                <span class="blog-tag">ConvNeXt</span>
+                            </div>
+                            <span class="blog-time"><i class="far fa-clock"></i> 6 phút đọc</span>
+                        </div>
+                        <h3 class="blog-card-title"><a href="#">Fine-tuning ConvNeXt: Hướng tiếp cận thực tế</a></h3>
+                        <p class="blog-excerpt">Làm thế nào để tinh chỉnh mô hình ConvNeXt từ đầu cho tác vụ phát hiện vật thể với tập dữ liệu tùy chỉnh gồm 5 nhãn khác nhau đạt mAP cao.</p>
+                        <div class="blog-footer">
+                            <span class="blog-date">10/05/2026</span>
+                            <a href="#" class="blog-read-link">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+                <!-- Blog 2 -->
+                <article class="blog-card glass-card">
+                    <div class="blog-content">
+                        <div class="blog-top">
+                            <div class="blog-tags">
+                                <span class="blog-tag">NLP</span>
+                                <span class="blog-tag">Transformer</span>
+                            </div>
+                            <span class="blog-time"><i class="far fa-clock"></i> 8 phút đọc</span>
+                        </div>
+                        <h3 class="blog-card-title"><a href="#">Xây dựng Transformer từ đầu: Tại sao nên thử?</a></h3>
+                        <p class="blog-excerpt">Tự code các khối Multi-Head Attention, Feed Forward và Positional Encoding để hiểu cặn kẽ cơ chế học sâu của kiến trúc NLP hiện đại này.</p>
+                        <div class="blog-footer">
+                            <span class="blog-date">28/04/2026</span>
+                            <a href="#" class="blog-read-link">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+                <!-- Blog 3 -->
+                <article class="blog-card glass-card">
+                    <div class="blog-content">
+                        <div class="blog-top">
+                            <div class="blog-tags">
+                                <span class="blog-tag">MLOps</span>
+                                <span class="blog-tag">Edge AI</span>
+                            </div>
+                            <span class="blog-time"><i class="far fa-clock"></i> 5 phút đọc</span>
+                        </div>
+                        <h3 class="blog-card-title"><a href="#">Triển khai MLOps trên thiết bị Edge</a></h3>
+                        <p class="blog-excerpt">Tối ưu hóa dung lượng mô hình qua lượng tử hóa (Quantization) và chuyển đổi sang định dạng ONNX/TensorRT để chạy trực tiếp trên thiết bị Jetson Nano.</p>
+                        <div class="blog-footer">
+                            <span class="blog-date">12/03/2026</span>
+                            <a href="#" class="blog-read-link">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+    </button>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Liên hệ</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <p class="contact-subtitle">Hãy kết nối với tôi!</p>
-                    <div class="contact-items">
-                        <a href="tel:0943914498" class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>0943 914 498</span>
+            <h2 class="section-title">Liên hệ với tôi</h2>
+            <div class="contact-card glass-card">
+                <div class="contact-info-panel">
+                    <div class="panel-header">
+                        <i class="fas fa-paper-plane panel-icon glow-icon"></i>
+                        <h3>Hãy kết nối để cùng phát triển</h3>
+                        <p>Tôi luôn cởi mở để thảo luận về các cơ hội hợp tác, dự án AI/Phần mềm hoặc nghiên cứu thú vị.</p>
+                    </div>
+
+                    <div class="contact-list">
+                        <a href="mailto:hongphucnguyentrong@gmail.com" class="contact-detail-item">
+                            <div class="item-icon-wrapper">
+                                <i class="fas fa-envelope item-icon"></i>
+                            </div>
+                            <div class="item-details">
+                                <span class="item-label">Email</span>
+                                <span class="item-text">hongphucnguyentrong@gmail.com</span>
+                            </div>
                         </a>
-                        <a href="mailto:hongphucnguyentrong@gmail.com" class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>hongphucnguyentrong@gmail.com</span>
+                        
+                        <a href="tel:0943914498" class="contact-detail-item">
+                            <div class="item-icon-wrapper">
+                                <i class="fas fa-phone item-icon"></i>
+                            </div>
+                            <div class="item-details">
+                                <span class="item-label">Điện thoại</span>
+                                <span class="item-text">0943 914 498</span>
+                            </div>
                         </a>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Hà Nội, Việt Nam</span>
+
+                        <div class="contact-detail-item no-link">
+                            <div class="item-icon-wrapper">
+                                <i class="fas fa-map-marker-alt item-icon"></i>
+                            </div>
+                            <div class="item-details">
+                                <span class="item-label">Địa điểm</span>
+                                <span class="item-text">Hà Nội, Việt Nam</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="social-links">
-                        <a href="https://github.com/Hongphuc05" target="_blank" class="social-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://linkedin.com" target="_blank" class="social-link">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="mailto:hongphucnguyentrong@gmail.com" class="social-link">
-                            <i class="fas fa-envelope"></i>
-                        </a>
+
+                    <div class="contact-social-bar">
+                        <h4>Mạng xã hội</h4>
+                        <div class="social-links">
+                            <a href="https://github.com/Hongphuc05" target="_blank" class="social-link" aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" class="social-link" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="mailto:hongphucnguyentrong@gmail.com" class="social-link" aria-label="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -375,11 +796,47 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Nguyễn Trọng Hồng Phúc. All rights reserved.</p>
-            <p>Made with <i class="fas fa-heart"></i> and <i class="fas fa-coffee"></i></p>
+        <div class="container footer-container">
+            <p class="copyright">&copy; 2026 Nguyễn Trọng Hồng Phúc. All rights reserved.</p>
+            <p class="footer-made">
+                Made with <i class="fas fa-heart heart-icon"></i> and <i class="fas fa-coffee coffee-icon"></i>
+            </p>
+            <!-- Visitor Counter -->
+            <div class="visitor-counter" id="visitorCounter">
+                <i class="fas fa-users"></i> Lượt truy cập: <span id="visitorCount">1248</span>
+            </div>
         </div>
     </footer>
+
+    <!-- Command Palette -->
+    <button class="cmd-palette-trigger" id="cmdPaletteTrigger" title="Nhấn Ctrl+K hoặc / để mở">
+        <span class="cmd-icon">⌘</span>
+        <span class="cmd-text">K</span>
+    </button>
+    <div class="cmd-palette-overlay" id="cmdPalette" style="display: none;">
+        <div class="cmd-palette-modal">
+            <div class="cmd-palette-search-wrapper">
+                <i class="fas fa-search cmd-search-icon"></i>
+                <input type="text" id="cmdInput" placeholder="Tìm kiếm lệnh (gõ để bắt đầu)..." class="cmd-palette-input">
+                <kbd class="cmd-kbd-indicator">ESC</kbd>
+            </div>
+            <div class="cmd-palette-results" id="cmdResults">
+                <!-- dynamic -->
+            </div>
+            <div class="cmd-palette-footer">
+                <div class="cmd-shortcuts">
+                    <span><kbd>↑↓</kbd> để di chuyển</span>
+                    <span><kbd>Enter</kbd> để chọn</span>
+                    <span><kbd>Esc</kbd> để đóng</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>
