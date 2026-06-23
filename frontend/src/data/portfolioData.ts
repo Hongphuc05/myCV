@@ -79,10 +79,22 @@ export const projects: Project[] = [
 
 export const experiences: Experience[] = [
   {
+    title: 'Leader Đội Ngũ Phát Triển Dự Án AI & Lập Trình Viên Phần Mềm',
+    company: 'Công ty Nội thất guu&T',
+    location: 'Vinhomes Smart City, Hà Nội',
+    period: '06/2025 - Hiện tại',
+    description: 'Phát triển đội ngũ AI agent quản lý quy trình làm việc cho lĩnh vực kiến trúc sư',
+    achievements: [
+      'Học được cách ứng dụng các AI agent để thay thế các quy trình nghiệp vụ thực tế',
+      'Thiết kế và deploy một trang web ra thị trường từ a-z (www.guut.com.vn)',
+      'Phát triển kỹ năng giải quyết vấn đề, testing và sửa lỗi',
+    ],
+  },
+  {
     title: 'Thực Tập Sinh Phần Mềm',
     company: 'Bệnh Viện Trung Ương Quân Đội 108',
     location: 'Khoa Trang Bị',
-    period: '12/2025 - Hiện tại',
+    period: '12/2025 - 06/2026',
     description: 'Phát triển website quản lý vật tư y tế của bệnh viện',
     achievements: [
       'Học được cách triển khai một dự án phần mềm hoàn chỉnh',
@@ -105,7 +117,7 @@ export const aboutInfo = {
     school: 'Trường ĐH Công nghệ - ĐHQG Hà Nội',
     major: 'Trí Tuệ Nhân Tạo',
     gpa: '3.0',
-    period: '08/2016 - 06/2020',
+    period: '08/2023 - 06/2027',
   },
   achievements: ['Top 10% Naver Hackathon', 'Giải khuyến khích UET Makathon'],
   goal: 'Phát triển thành AI Engineer có khả năng thiết kế và vận hành các hệ thống thông minh trong môi trường production.',

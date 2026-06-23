@@ -1052,6 +1052,19 @@ body {
   flex-shrink: 0;
 }
 
+.timeline-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.timeline-link:hover {
+  color: var(--accent-color);
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
 /* ===== PROJECTS SECTION ===== */
 .projects {
   padding: 8rem 0;

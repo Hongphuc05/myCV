@@ -24,6 +24,24 @@ const Experience = () => {
     restDelta: 0.001
   });
 
+  const renderAchievement = (text: string) => {
+    const urlRegex = /(https?:\/\/[^\s)]+|www\.[^\s)]+)/g;
+    const parts = text.split(urlRegex);
+    if (parts.length === 1) return text;
+
+    return parts.map((part, index) => {
+      if (urlRegex.test(part)) {
+        const href = part.startsWith('http') ? part : `https://${part}`;
+        return (
+          <a key={index} href={href} target="_blank" rel="noopener noreferrer" className="timeline-link">
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
   return (
     <section id="experience" className="experience" ref={containerRef}>
       <div className="container">
@@ -81,7 +99,7 @@ const Experience = () => {
                     {exp.achievements.map((achievement, i) => (
                       <li key={i}>
                         <span className="bullet-point" />
-                        <span>{achievement}</span>
+                        <span>{renderAchievement(achievement)}</span>
                       </li>
                     ))}
                   </ul>
