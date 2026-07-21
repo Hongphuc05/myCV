@@ -34,7 +34,6 @@ const Skills = () => {
   });
 
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
-  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   return (
     <section id="skills" className="skills" ref={ref}>
