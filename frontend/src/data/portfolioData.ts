@@ -22,6 +22,17 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
+    title: 'Data Engineering',
+    icon: 'database',
+    skills: [
+      { name: 'Airflow', level: 85 },
+      { name: 'Iceberg', level: 85 },
+      { name: 'Trino', level: 80 },
+      { name: 'NebulaGraph', level: 80 },
+      { name: 'MinIO', level: 85 },
+    ],
+  },
+  {
     title: 'Automation & Testing',
     icon: 'robot',
     skills: [

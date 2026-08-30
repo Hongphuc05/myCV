@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiCode, FiCloud } from 'react-icons/fi';
+import { FiCode, FiCloud, FiDatabase } from 'react-icons/fi';
 import { SiRobotframework } from 'react-icons/si';
 import { BiBrain } from 'react-icons/bi';
 import { skillCategories } from '../data/portfolioData';
@@ -13,6 +13,7 @@ const iconMap: { [key: string]: React.ElementType } = {
   code: FiCode,
   robot: SiRobotframework,
   cloud: FiCloud,
+  database: FiDatabase,
 };
 
 const getSkillColor = (name: string) => {
@@ -24,6 +25,11 @@ const getSkillColor = (name: string) => {
   if (n.includes('selenium') || n.includes('playwright') || n.includes('scraping')) return '#06b6d4';
   if (n.includes('git')) return '#f05032';
   if (n.includes('aws') || n.includes('gcp') || n.includes('cloud')) return '#ff9900';
+  if (n.includes('airflow')) return '#017ce8';
+  if (n.includes('iceberg')) return '#276878';
+  if (n.includes('trino')) return '#dd00a1';
+  if (n.includes('nebulagraph') || n.includes('nebula')) return '#00bfa5';
+  if (n.includes('minio')) return '#c72c48';
   return '#6366f1';
 };
 
