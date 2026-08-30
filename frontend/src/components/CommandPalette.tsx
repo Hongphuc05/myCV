@@ -75,8 +75,8 @@ const CommandPalette = () => {
 
   const downloadCV = () => {
     const link = document.createElement('a');
-    link.href = '/cv_HongPhuc.pdf';
-    link.download = 'cv_HongPhuc.pdf';
+    link.href = '/Hongphuc_cv.pdf';
+    link.download = 'Hongphuc_cv.pdf';
     link.click();
     setIsOpen(false);
   };

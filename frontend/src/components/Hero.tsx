@@ -117,8 +117,8 @@ const Hero = () => {
               transition={{ delay: 0.7 }}
             >
               <motion.a
-                href="/cv_HongPhuc.pdf"
-                download="cv_HongPhuc.pdf"
+                href="/Hongphuc_cv.pdf"
+                download="Hongphuc_cv.pdf"
                 className="btn btn-primary"
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.98 }}
